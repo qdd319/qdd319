@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>福宝商城</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="shortcut icon" href="http://duoduo.lelesc.cn//static/common/ico/default.ico" />
+    <link rel="stylesheet" href="/static/plug/layui-admin/dist/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/plug/layui-admin/dist/layuiadmin/style/admin.css" media="all">
+    <script>image_upload_url="/admin/file/image.html";</script>    <style>
+        .layui-layout .first-nav {
+            width: 110px;
+            box-shadow: 1px 0px 5px rgba(0, 0, 0, 0.1);
+            z-index: 1003;
+        }
+        .layui-layout .layui-side,
+        .layui-layout .first-nav  .layui-logo {
+            background-color: #fff !important;
+        }
+
+        .layui-layout .second-nav {
+            width: 120px;
+            overflow: hidden;
+            box-sizing: border-box;
+            left: 110px;
+            top: 92px;
+        }
+
+        .layui-layout-admin .layui-logo {
+            width: 110px;
+            height: 50px;
+        }
+
+        .layui-layout-admin .layui-layout-left,
+        .layui-layout-body .layadmin-pagetabs {
+            left: 110px;
+        }
+
+        .layui-layout-body .layui-body {
+            left: 230px;
+            top: 90px;
+        }
+
+        .first-nav .layui-nav {
+            width: 110px;
+        }
+
+        .second-nav .layui-nav {
+            width: 120px;
+        }
+
+        .layui-side-menu .layui-nav .layui-nav-item a {
+            color: #666;
+            padding-left: 37px;
+            padding-right: 10px;
+            padding-top: 4px;
+            padding-bottom: 4px;
+        }
+        .layui-side-menu.second-nav .layui-nav  *  {
+            font-size: 13px;
+        }
+        .layui-side-menu .layui-nav .layui-nav-item.layui-this >a,
+        .layui-nav .layui-nav-itemed .layui-nav-child .layui-this a,
+        .layui-nav .layui-nav-item:hover>a,
+        .layui-nav .layui-nav-itemed .layui-nav-child dd:hover a  {
+            color: #3A91FB;
+            /*color: #666;*/
+            
+        }
+
+        .layui-side-menu .layui-nav .layui-nav-item.layui-this a,
+        .layui-nav .layui-nav-itemed .layui-nav-child .layui-this a {
+            background-color: #fff !important;
+        }
+
+        .layui-side-menu .layui-nav .layui-nav-item.layui-this,
+        .layui-nav .layui-nav-itemed .layui-nav-child .layui-this {
+            background-color: #fff !important;
+        }
+
+        .layui-side-menu .layui-nav .layui-nav-item .layui-icon {
+            left: 14px;
+        }
+
+        .second-nav .layui-nav .layui-nav-item a {
+            padding: 0 20px;
+        }
+        .second-nav .layui-nav .layui-nav-item dd a  {
+            padding: 0 20px 0 20px;
+        }
+        .layui-side-menu .layui-nav-tree .layui-nav-bar {
+            display: none;
+        }
+
+        .layui-nav-itemed>a {
+            color: #666 !important;
+        }
+
+        .layui-side-menu .layui-nav-tree .layui-nav-item .layui-icon.second-icon {
+            position: absolute;
+            top: 50%;
+            right: 6px;
+            font-size: 11px;
+            width: 15px;
+            height: 15px;
+            left: auto;
+            transform: rotateZ(180deg);
+            margin-top: 3px;
+        } 
+        .layui-side-menu .layui-nav-tree .layui-nav-item .layui-icon.second-icon.up {
+            transform: rotateZ(0deg);
+            margin-top: -19px;
+            right: 4px;
+        }
+
+        .layui-side-menu .layui-nav-tree .layui-nav-item .layui-nav-more.down {
+            border-color: transparent transparent #666;
+        } 
+
+        .layui-nav .layui-nav-itemed>.layui-nav-child {
+            background-color: #fff !important;
+        }
+
+        .layui-side .second-title {
+            color: #333;
+            position: absolute;
+            line-height: 48px;
+            padding-left: 20px;
+            font-weight: bold;
+            width: 140px;
+            border-bottom: 1px solid #E5E5E5;
+            box-sizing: border-box;
+        }
+
+        .layui-layout-body .layui-body.hide-second-nav {
+            left: 110px;
+        }
+
+        .layui-side.layui-side-menu .activate a {
+            color: #3A91FB;
+        }
+        .layui-side-menu .layui-nav .layui-nav-item.activate {
+            background-color: #EBF4FF !important;
+        }
+        @media screen and (max-width: 992px) {
+            .layui-layout-admin .layui-side {
+                transform: translate3d(0, 0, 0);
+            }
+        }
+    </style>
+</head>
+
+<body class="layui-layout-body">
+    <div id="LAY_app">
+        <div class="layui-layout layui-layout-admin">
+            <div class="layui-header">
+                <!-- 头部区域 -->
+                <ul class="layui-nav layui-layout-left">
+                    <li class="layui-nav-item" lay-unselect>
+                        <a href="javascript:" layadmin-event="refresh" title="刷新">
+                            <i class="layui-icon layui-icon-refresh-3"></i>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="layui-nav layui-layout-right" lay-filter="layadmin-layout-right">
+<!--                    <li class="layui-nav-item layui-hide-xs" lay-unselect>-->
+<!--                        <a href="javascript:" layadmin-event="theme">-->
+<!--                            <i class="layui-icon layui-icon-theme"></i>-->
+<!--                        </a>-->
+<!--                    </li>-->
+                    <li class="layui-nav-item layui-hide-xs" lay-unselect>
+                        <a href="javascript:" layadmin-event="note">
+                            <i class="layui-icon layui-icon-note"></i>
+                        </a>
+                    </li>
+                    <li class="layui-nav-item layui-hide-xs" lay-unselect>
+                        <a href="javascript:" layadmin-event="fullscreen">
+                            <i class="layui-icon layui-icon-screen-full"></i>
+                        </a>
+                    </li>
+                    <li class="layui-nav-item" lay-unselect>
+                        <a href="javascript:">
+                            <cite>admin（系统管理员）</cite>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd><a lay-href="/admin/my/password.html">修改密码</a></dd>
+                            <hr>
+                            <dd style="text-align: center;"><a href="/admin/account/logout.html">退出</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item layui-show-xs-inline-block layui-hide-sm" lay-unselect>
+                        <a href="javascript:" layadmin-event="more">
+                            <i class="layui-icon layui-icon-more-vertical"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 侧边菜单 (一级)-->
+            <div class="layui-side layui-side-menu first-nav">
+                <div class="layui-side-scroll">
+                    <div class="layui-logo" style="color: #000;">
+                        福宝商城                    </div>
+                    <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">
+                                                    <li data-id="29" class="layui-nav-item">
+                                <a href="javascript:" lay-tips="商品">
+                                    <i class="layui-icon layui-icon-cart-simple"></i>
+                                    <cite>商品</cite>
+                                </a>
+                            </li>
+                                                    <li data-id="37" class="layui-nav-item">
+                                <a href="javascript:" lay-tips="订单">
+                                    <i class="layui-icon layui-icon-notice"></i>
+                                    <cite>订单</cite>
+                                </a>
+                            </li>
+                                                    <li data-id="33" class="layui-nav-item">
+                                <a href="javascript:" lay-tips="会员">
+                                    <i class="layui-icon layui-icon-username"></i>
+                                    <cite>会员</cite>
+                                </a>
+                            </li>
+                                                    <li data-id="85" class="layui-nav-item">
+                                <a href="javascript:" lay-tips="团队">
+                                    <i class="layui-icon layui-icon-template-1"></i>
+                                    <cite>团队</cite>
+                                </a>
+                            </li>
+                                                    <li data-id="65" class="layui-nav-item">
+                                <a href="javascript:" lay-tips="内容">
+                                    <i class="layui-icon layui-icon-read"></i>
+                                    <cite>内容</cite>
+                                </a>
+                            </li>
+                                                    <li data-id="49" class="layui-nav-item">
+                                <a href="javascript:" lay-tips="微信">
+                                    <i class="layui-icon layui-icon-login-wechat"></i>
+                                    <cite>微信</cite>
+                                </a>
+                            </li>
+                                                    <li data-id="81" class="layui-nav-item">
+                                <a href="javascript:" lay-tips="财务">
+                                    <i class="layui-icon layui-icon-rmb"></i>
+                                    <cite>财务</cite>
+                                </a>
+                            </li>
+                                                    <li data-id="102" class="layui-nav-item">
+                                <a href="javascript:" lay-tips="数据">
+                                    <i class="layui-icon layui-icon-website"></i>
+                                    <cite>数据</cite>
+                                </a>
+                            </li>
+                                                    <li data-id="18" class="layui-nav-item">
+                                <a href="javascript:" lay-tips="设置">
+                                    <i class="layui-icon layui-icon-set"></i>
+                                    <cite>设置</cite>
+                                </a>
+                            </li>
+                                                    <li data-id="19" class="layui-nav-item">
+                                <a href="javascript:" lay-tips="个人">
+                                    <i class="layui-icon layui-icon-friends"></i>
+                                    <cite>个人</cite>
+                                </a>
+                            </li>
+                                            </ul>
+                </div>
+            </div>
+            <!-- 子级菜单 -->
+            <script id="subMenu" type="text/html">
+                {{#  if(d) { }}
+                    <div class="layui-side layui-side-menu second-nav ">
+                        <div class="layui-side-scroll">
+                            <div class="second-title">
+                                <div>{{d.name}}</div>
+                            </div>
+                            <ul class="layui-nav layui-nav-tree">
+                                {{#  layui.each(d.sub, function(index, item){ }}
+                                    {{#  if(item.sub.length <= 0) { }}
+                                        <li  class="layui-nav-item  {{#  if(index == 0) { }}layui-this{{# } }}">
+                                            <a href="javascript:" lay-href='{{item.uri}}' lay-tips="{{ item.name }}">
+                                                <cite>{{ item.name }}</cite>
+                                            </a>
+                                        </li>
+                                    {{# } else { }}
+                                        <li class="layui-nav-item layui-nav-itemed">
+                                            <a href="javascript:" lay-tips="{{ item.name }}">
+                                                <cite>{{ item.name }}</cite>
+                                                <i class="layui-icon second-icon layui-icon-triangle-d"></i>
+                                            </a>
+                                            <dl class="layui-nav-child">
+                                                {{#  layui.each(item.sub, function(i, itemSub){ }}
+                                                    <dd class="{{#  if(index == 0 && i==0) { }}layui-this{{# } }}">
+                                                        <a href="javascript:" lay-href="{{itemSub.uri}}">{{itemSub.name}}</a>
+                                                    </dd>
+                                                {{#  }); }}
+                                            </dl>
+                                        </li>
+                                    {{# } }}
+                                {{#  }); }}
+                            </ul>
+                        </div>
+                    </div>
+                {{#  } }}
+            </script>
+            <div id="view"></div>
+        </div>
+
+        <!-- 页面标签 -->
+        <div class="layadmin-pagetabs" id="LAY_app_tabs">
+            <div class="layui-icon layadmin-tabs-control layui-icon-prev" layadmin-event="leftPage"></div>
+            <div class="layui-icon layadmin-tabs-control layui-icon-next" layadmin-event="rightPage"></div>
+            <div class="layui-icon layadmin-tabs-control layui-icon-down">
+                <ul class="layui-nav layadmin-tabs-select" lay-filter="layadmin-pagetabs-nav">
+                    <li class="layui-nav-item" lay-unselect>
+                        <a href="javascript:;"></a>
+                        <dl class="layui-nav-child layui-anim-fadein">
+                            <dd layadmin-event="closeThisTabs"><a href="javascript:;">关闭当前标签页</a></dd>
+                            <dd layadmin-event="closeOtherTabs"><a href="javascript:;">关闭其它标签页</a></dd>
+                            <dd layadmin-event="closeAllTabs"><a href="javascript:;">关闭全部标签页</a></dd>
+                        </dl>
+                    </li>
+                </ul>
+            </div>
+            <div class="layui-tab" lay-unauto lay-allowClose="true" lay-filter="layadmin-layout-tabs">
+                <ul class="layui-tab-title" id="LAY_app_tabsheader">
+                    <li lay-id="" lay-attr="/admin/index/stat.html" class="layui-this">工作台</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 主体内容 -->
+        <div class="layui-body hide-second-nav" id="LAY_app_body">
+            <div class="layadmin-tabsbody-item layui-show">
+                <iframe src="/admin/index/stat.html" frameborder="0" class="layadmin-iframe"></iframe>
+            </div>
+        </div>
+
+        <!-- 辅助元素 -->
+        <div class="layadmin-body-shade" layadmin-event="shade"></div>
+    </div>
+
+    <script src="/static/plug/layui-admin/dist/layuiadmin/layui/layui.js"></script>
+    <script>
+        layui.config({
+        version:"2.4.0.20210429",
+            base: '/static/plug/layui-admin/dist/layuiadmin/' //静态资源所在路径
+        }).extend({
+            index: 'lib/index' //主入口模块
+        }).use(['index', 'element', 'laytpl'], function () {
+            var element = layui.element;
+            var $ = layui.$;
+            var laytpl = layui.laytpl;
+            element.init();
+            element.render('nav');
+            $('#think_page_trace_open').remove();
+
+            // 展示二级菜单 fzr
+            localStorage.setItem("menus", '[{"id":29,"type":1,"system":0,"pid":0,"name":"\u5546\u54c1","icon":"layui-icon-cart-simple","uri":"","sort":100,"disable":0,"create_time":1602555146,"update_time":1616480700,"del":0,"partner_id":0,"sub":[{"id":44,"type":1,"system":0,"pid":29,"name":"\u5546\u54c1\u7ba1\u7406","icon":"","uri":"\/admin\/goods\/lists.html","sort":99,"disable":0,"create_time":1603159926,"update_time":1610340209,"del":0,"partner_id":0,"sub":[]},{"id":31,"type":1,"system":0,"pid":29,"name":"\u5206\u7c7b\u7ba1\u7406","icon":"","uri":"\/admin\/goods_category\/lists.html","sort":97,"disable":0,"create_time":1602555225,"update_time":1608102166,"del":0,"partner_id":0,"sub":[]},{"id":41,"type":1,"system":0,"pid":29,"name":"\u5546\u54c1\u8bc4\u4ef7","icon":"","uri":"\/admin\/goods_comment\/lists.html","sort":50,"disable":0,"create_time":1602647268,"update_time":1608102230,"del":0,"partner_id":0,"sub":[]}]},{"id":37,"type":1,"system":0,"pid":0,"name":"\u8ba2\u5355","icon":"layui-icon-notice","uri":"","sort":97,"disable":0,"create_time":1602576261,"update_time":1608101850,"del":0,"partner_id":0,"sub":[{"id":38,"type":1,"system":0,"pid":37,"name":"\u8ba2\u5355\u5217\u8868","icon":"","uri":"\/admin\/order\/lists.html","sort":50,"disable":0,"create_time":1602576521,"update_time":1605522434,"del":0,"partner_id":0,"sub":[]}]},{"id":33,"type":1,"system":0,"pid":0,"name":"\u4f1a\u5458","icon":"layui-icon-username","uri":"","sort":95,"disable":0,"create_time":1602570345,"update_time":1608101864,"del":0,"partner_id":0,"sub":[{"id":34,"type":1,"system":0,"pid":33,"name":"\u4f1a\u5458\u7ba1\u7406","icon":"","uri":"\/admin\/user\/lists.html","sort":99,"disable":0,"create_time":1602570372,"update_time":1608262169,"del":0,"partner_id":0,"sub":[]},{"id":35,"type":1,"system":0,"pid":33,"name":"\u4f1a\u5458\u7b49\u7ea7","icon":"","uri":"\/admin\/user_level\/lists.html","sort":97,"disable":0,"create_time":1602570437,"update_time":1608262182,"del":0,"partner_id":0,"sub":[]},{"id":139,"type":1,"system":0,"pid":33,"name":"\u8f6c\u8d26\u8bb0\u5f55","icon":"","uri":"\/admin\/user\/transferrecord.html","sort":50,"disable":0,"create_time":1618631242,"update_time":null,"del":0,"partner_id":0,"sub":[]}]},{"id":85,"type":1,"system":0,"pid":0,"name":"\u56e2\u961f","icon":"layui-icon-template-1","uri":"","sort":91,"disable":0,"create_time":1605949476,"update_time":1641462338,"del":0,"partner_id":0,"sub":[{"id":86,"type":1,"system":0,"pid":85,"name":"\u56e2\u961f\u5217\u8868","icon":"","uri":"\/admin\/distribution_member\/index.html","sort":50,"disable":0,"create_time":1605949513,"update_time":1641462357,"del":0,"partner_id":0,"sub":[]}]},{"id":65,"type":1,"system":0,"pid":0,"name":"\u5185\u5bb9","icon":"layui-icon-read","uri":"","sort":89,"disable":0,"create_time":1605172316,"update_time":1608101965,"del":0,"partner_id":0,"sub":[{"id":66,"type":1,"system":0,"pid":65,"name":"\u5e7f\u544a","icon":"","uri":"","sort":50,"disable":0,"create_time":1605172328,"update_time":1605522463,"del":0,"partner_id":0,"sub":[{"id":68,"type":1,"system":0,"pid":66,"name":"\u5e7f\u544a\u4f4d","icon":"","uri":"\/admin\/ad_position\/lists.html","sort":50,"disable":0,"create_time":1605172428,"update_time":1612425380,"del":0,"partner_id":0,"sub":[]},{"id":67,"type":1,"system":0,"pid":66,"name":"\u5e7f\u544a\u7ba1\u7406","icon":"","uri":"\/admin\/ad\/lists.html","sort":50,"disable":0,"create_time":1605172346,"update_time":1605172376,"del":0,"partner_id":0,"sub":[]}]},{"id":69,"type":1,"system":0,"pid":65,"name":"\u5e2e\u52a9","icon":"","uri":"","sort":50,"disable":0,"create_time":1605177392,"update_time":1605522474,"del":0,"partner_id":0,"sub":[{"id":70,"type":1,"system":0,"pid":69,"name":"\u5e2e\u52a9\u7ba1\u7406","icon":"","uri":"\/admin\/help\/lists.html","sort":50,"disable":0,"create_time":1605177427,"update_time":null,"del":0,"partner_id":0,"sub":[]},{"id":71,"type":1,"system":0,"pid":69,"name":"\u5e2e\u52a9\u5206\u7c7b","icon":"","uri":"\/admin\/help_category\/lists.html","sort":50,"disable":0,"create_time":1605177450,"update_time":null,"del":0,"partner_id":0,"sub":[]}]},{"id":73,"type":1,"system":0,"pid":65,"name":"\u6587\u7ae0","icon":"","uri":"","sort":50,"disable":0,"create_time":1605250150,"update_time":1605522487,"del":0,"partner_id":0,"sub":[{"id":75,"type":1,"system":0,"pid":73,"name":"\u6587\u7ae0\u5206\u7c7b","icon":"","uri":"\/admin\/article_category\/lists.html","sort":50,"disable":0,"create_time":1605250217,"update_time":null,"del":0,"partner_id":0,"sub":[]},{"id":74,"type":1,"system":0,"pid":73,"name":"\u6587\u7ae0\u7ba1\u7406","icon":"","uri":"\/admin\/article\/lists.html","sort":50,"disable":0,"create_time":1605250172,"update_time":null,"del":0,"partner_id":0,"sub":[]}]}]},{"id":49,"type":1,"system":0,"pid":0,"name":"\u5fae\u4fe1","icon":"layui-icon-login-wechat","uri":"","sort":85,"disable":0,"create_time":1603417725,"update_time":1608101989,"del":0,"partner_id":0,"sub":[{"id":50,"type":1,"system":0,"pid":49,"name":"\u5fae\u4fe1\u516c\u4f17\u53f7","icon":"","uri":"","sort":99,"disable":0,"create_time":1603417748,"update_time":1608193993,"del":0,"partner_id":0,"sub":[{"id":51,"type":1,"system":0,"pid":50,"name":"\u516c\u4f17\u53f7\u8bbe\u7f6e","icon":"","uri":"\/admin\/oa\/setoa.html","sort":99,"disable":0,"create_time":1603417764,"update_time":1608193146,"del":0,"partner_id":0,"sub":[]},{"id":52,"type":1,"system":0,"pid":50,"name":"\u83dc\u5355\u7ba1\u7406","icon":"","uri":"\/admin\/oa\/oamenu.html","sort":97,"disable":0,"create_time":1603417789,"update_time":1608193168,"del":0,"partner_id":0,"sub":[]},{"id":116,"type":1,"system":0,"pid":50,"name":"\u56de\u590d\u7ba1\u7406","icon":"","uri":"\/admin\/wechat_reply\/lists.html","sort":95,"disable":0,"create_time":1607139107,"update_time":1608193178,"del":0,"partner_id":0,"sub":[]}]},{"id":53,"type":1,"system":0,"pid":49,"name":"\u5fae\u4fe1\u5c0f\u7a0b\u5e8f","icon":"","uri":"","sort":97,"disable":0,"create_time":1603417800,"update_time":1608194002,"del":0,"partner_id":0,"sub":[{"id":54,"type":1,"system":0,"pid":53,"name":"\u5c0f\u7a0b\u5e8f\u8bbe\u7f6e","icon":"","uri":"\/admin\/mnp\/setmnp.html","sort":99,"disable":0,"create_time":1603417818,"update_time":1608193191,"del":0,"partner_id":0,"sub":[]}]},{"id":120,"type":1,"system":0,"pid":49,"name":" \u5f00\u653e\u5e73\u53f0","icon":"","uri":"","sort":50,"disable":0,"create_time":1608200356,"update_time":1612425336,"del":0,"partner_id":0,"sub":[{"id":121,"type":1,"system":0,"pid":120,"name":"\u5f00\u653e\u5e73\u53f0","icon":"","uri":"\/admin\/op\/config.html","sort":50,"disable":0,"create_time":1608200416,"update_time":1612425325,"del":0,"partner_id":0,"sub":[]}]}]},{"id":81,"type":1,"system":0,"pid":0,"name":"\u8d22\u52a1","icon":"layui-icon-rmb","uri":"","sort":83,"disable":0,"create_time":1605664275,"update_time":1608102003,"del":0,"partner_id":0,"sub":[{"id":122,"type":1,"system":0,"pid":81,"name":"\u8d22\u52a1\u6982\u51b5","icon":"","uri":"\/admin\/finance\/lists.html","sort":99,"disable":0,"create_time":1608363142,"update_time":1608455635,"del":0,"partner_id":0,"sub":[]},{"id":84,"type":1,"system":0,"pid":81,"name":"\u8d44\u91d1\u8bb0\u5f55","icon":"","uri":"\/admin\/account_log\/capitallist.html","sort":50,"disable":0,"create_time":1605693585,"update_time":1605865218,"del":0,"partner_id":0,"sub":[]},{"id":91,"type":1,"system":0,"pid":81,"name":"\u7528\u6237\u63d0\u73b0","icon":"","uri":"\/admin\/withdraw\/lists.html","sort":50,"disable":0,"create_time":1606448795,"update_time":1641462389,"del":0,"partner_id":0,"sub":[]}]},{"id":102,"type":1,"system":0,"pid":0,"name":"\u6570\u636e","icon":"layui-icon-website","uri":"","sort":81,"disable":0,"create_time":1606449677,"update_time":1608102018,"del":0,"partner_id":0,"sub":[{"id":103,"type":1,"system":0,"pid":102,"name":"\u4f1a\u5458","icon":"","uri":"\/admin\/statistics\/member.html","sort":100,"disable":0,"create_time":1606449697,"update_time":1608719516,"del":0,"partner_id":0,"sub":[]},{"id":104,"type":1,"system":0,"pid":102,"name":"\u5546\u54c1","icon":"","uri":"\/admin\/statistics\/goods.html","sort":90,"disable":0,"create_time":1606449713,"update_time":1608719471,"del":0,"partner_id":0,"sub":[]},{"id":105,"type":1,"system":0,"pid":102,"name":"\u4ea4\u6613","icon":"","uri":"\/admin\/statistics\/deal.html","sort":80,"disable":0,"create_time":1606449733,"update_time":1608719534,"del":0,"partner_id":0,"sub":[]},{"id":106,"type":1,"system":0,"pid":102,"name":"\u8bbf\u95ee","icon":"","uri":"\/admin\/statistics\/visit.html","sort":70,"disable":0,"create_time":1606449750,"update_time":1610340707,"del":0,"partner_id":0,"sub":[]}]},{"id":18,"type":1,"system":0,"pid":0,"name":"\u8bbe\u7f6e","icon":"layui-icon-set","uri":"","sort":79,"disable":0,"create_time":1597633295,"update_time":1608102027,"del":0,"partner_id":0,"sub":[{"id":17,"type":1,"system":0,"pid":18,"name":"\u57fa\u7840\u8bbe\u7f6e","icon":"","uri":"","sort":99,"disable":0,"create_time":1597633276,"update_time":1608102098,"del":0,"partner_id":0,"sub":[{"id":21,"type":1,"system":0,"pid":17,"name":"\u7f51\u7ad9\u8bbe\u7f6e","icon":"","uri":"\/admin\/basic\/website.html","sort":99,"disable":0,"create_time":1597658026,"update_time":1608467331,"del":0,"partner_id":0,"sub":[]},{"id":22,"type":1,"system":0,"pid":17,"name":"\u7248\u6743\u5907\u6848","icon":"","uri":"\/admin\/basic\/copyright.html","sort":97,"disable":0,"create_time":1597658101,"update_time":1608467338,"del":0,"partner_id":0,"sub":[]},{"id":59,"type":1,"system":0,"pid":17,"name":"\u652f\u4ed8\u8bbe\u7f6e","icon":"","uri":"\/admin\/pay_config\/lists.html","sort":95,"disable":0,"create_time":1603779401,"update_time":1608467354,"del":0,"partner_id":0,"sub":[]},{"id":109,"type":1,"system":0,"pid":17,"name":"APP\u8bbe\u7f6e","icon":"","uri":"\/admin\/basic\/app.html","sort":50,"disable":0,"create_time":1606819436,"update_time":null,"del":0,"partner_id":0,"sub":[]}]},{"id":56,"type":1,"system":0,"pid":18,"name":"\u5546\u57ce\u8bbe\u7f6e","icon":"","uri":"","sort":97,"disable":0,"create_time":1603524640,"update_time":1608102112,"del":0,"partner_id":0,"sub":[{"id":90,"type":1,"system":0,"pid":56,"name":"\u63d0\u73b0\u8f6c\u8d26\u914d\u7f6e","icon":"","uri":"\/admin\/shop_setting\/withdraw.html","sort":100,"disable":0,"create_time":1606357500,"update_time":1641888461,"del":0,"partner_id":0,"sub":[]},{"id":144,"type":1,"system":0,"pid":56,"name":"\u8fd4\u4f63\u914d\u7f6e","icon":"","uri":"\/admin\/shop_setting\/yongjin.html","sort":100,"disable":0,"create_time":1641888283,"update_time":1641888418,"del":0,"partner_id":0,"sub":[]},{"id":57,"type":1,"system":0,"pid":56,"name":"\u4ea4\u6613\u8bbe\u7f6e","icon":"","uri":"\/admin\/shop_setting\/trading.html","sort":99,"disable":0,"create_time":1603524686,"update_time":1608467395,"del":0,"partner_id":0,"sub":[]},{"id":138,"type":1,"system":0,"pid":56,"name":"\u6ce8\u518c\u8bbe\u7f6e","icon":"","uri":"\/admin\/shop_setting\/setregister.html","sort":50,"disable":0,"create_time":1614247116,"update_time":null,"del":0,"partner_id":0,"sub":[]},{"id":124,"type":1,"system":0,"pid":56,"name":"\u5ba2\u670d\u8bbe\u7f6e","icon":"","uri":"\/admin\/service_config\/config.html","sort":50,"disable":0,"create_time":1608972991,"update_time":null,"del":0,"partner_id":0,"sub":[]},{"id":132,"type":1,"system":0,"pid":56,"name":"\u5c0f\u7968\u6253\u5370","icon":"layui-icon-carousel","uri":"\/admin\/printer\/lists.html","sort":50,"disable":0,"create_time":1612523268,"update_time":null,"del":0,"partner_id":0,"sub":[]},{"id":123,"type":1,"system":0,"pid":56,"name":"\u70ed\u95e8\u641c\u7d22","icon":"","uri":"\/admin\/hot_search\/index.html","sort":50,"disable":0,"create_time":1608607023,"update_time":null,"del":0,"partner_id":0,"sub":[]},{"id":58,"type":1,"system":0,"pid":56,"name":"\u653f\u7b56\u534f\u8bae","icon":"","uri":"\/admin\/shop_setting\/policy.html","sort":50,"disable":0,"create_time":1603524707,"update_time":null,"del":0,"partner_id":0,"sub":[]},{"id":43,"type":1,"system":0,"pid":56,"name":"\u914d\u9001\u7ba1\u7406","icon":"","uri":"\/admin\/freight\/lists.html","sort":50,"disable":0,"create_time":1602666008,"update_time":1603525668,"del":0,"partner_id":0,"sub":[]}]},{"id":1,"type":1,"system":1,"pid":18,"name":"\u6743\u9650\u7ba1\u7406","icon":"","uri":"","sort":95,"disable":0,"create_time":1597593692,"update_time":1608102122,"del":0,"partner_id":0,"sub":[{"id":6,"type":1,"system":0,"pid":1,"name":"\u7ba1\u7406\u5458","icon":"","uri":"\/admin\/admin\/lists.html","sort":51,"disable":0,"create_time":1597594526,"update_time":1597636523,"del":0,"partner_id":0,"sub":[]},{"id":2,"type":1,"system":0,"pid":1,"name":"\u83dc\u5355\u6743\u9650","icon":"","uri":"\/admin\/auth\/lists.html","sort":50,"disable":0,"create_time":1597593762,"update_time":1612594453,"del":0,"partner_id":0,"sub":[]},{"id":10,"type":1,"system":0,"pid":1,"name":"\u89d2\u8272","icon":"","uri":"\/admin\/role\/lists.html","sort":50,"disable":0,"create_time":1597596178,"update_time":1597635420,"del":0,"partner_id":0,"sub":[]}]}]},{"id":19,"type":1,"system":0,"pid":0,"name":"\u4e2a\u4eba","icon":"layui-icon-friends","uri":"\/admin\/my\/password.html","sort":50,"disable":0,"create_time":1597633558,"update_time":1608102250,"del":0,"partner_id":0,"sub":[{"id":20,"type":1,"system":0,"pid":19,"name":"\u4fee\u6539\u5bc6\u7801","icon":"","uri":"\/admin\/my\/password.html","sort":100,"disable":0,"create_time":1597633582,"update_time":1606442853,"del":0,"partner_id":0,"sub":[]}]}]');
+            $('.layui-nav-tree .layui-nav-item').click(function () {
+                // 一级菜单的样式切换
+                $(this).siblings().removeClass('activate');
+                $(this).addClass('activate');
+                // 获取一级菜单ID, 找出二级三级菜单那数据
+                var id = parseInt($(this).attr('data-id'));
+                var menus = JSON.parse('[{"id":29,"type":1,"system":0,"pid":0,"name":"\u5546\u54c1","icon":"layui-icon-cart-simple","uri":"","sort":100,"disable":0,"create_time":1602555146,"update_time":1616480700,"del":0,"partner_id":0,"sub":[{"id":44,"type":1,"system":0,"pid":29,"name":"\u5546\u54c1\u7ba1\u7406","icon":"","uri":"\/admin\/goods\/lists.html","sort":99,"disable":0,"create_time":1603159926,"update_time":1610340209,"del":0,"partner_id":0,"sub":[]},{"id":31,"type":1,"system":0,"pid":29,"name":"\u5206\u7c7b\u7ba1\u7406","icon":"","uri":"\/admin\/goods_category\/lists.html","sort":97,"disable":0,"create_time":1602555225,"update_time":1608102166,"del":0,"partner_id":0,"sub":[]},{"id":41,"type":1,"system":0,"pid":29,"name":"\u5546\u54c1\u8bc4\u4ef7","icon":"","uri":"\/admin\/goods_comment\/lists.html","sort":50,"disable":0,"create_time":1602647268,"update_time":1608102230,"del":0,"partner_id":0,"sub":[]}]},{"id":37,"type":1,"system":0,"pid":0,"name":"\u8ba2\u5355","icon":"layui-icon-notice","uri":"","sort":97,"disable":0,"create_time":1602576261,"update_time":1608101850,"del":0,"partner_id":0,"sub":[{"id":38,"type":1,"system":0,"pid":37,"name":"\u8ba2\u5355\u5217\u8868","icon":"","uri":"\/admin\/order\/lists.html","sort":50,"disable":0,"create_time":1602576521,"update_time":1605522434,"del":0,"partner_id":0,"sub":[]}]},{"id":33,"type":1,"system":0,"pid":0,"name":"\u4f1a\u5458","icon":"layui-icon-username","uri":"","sort":95,"disable":0,"create_time":1602570345,"update_time":1608101864,"del":0,"partner_id":0,"sub":[{"id":34,"type":1,"system":0,"pid":33,"name":"\u4f1a\u5458\u7ba1\u7406","icon":"","uri":"\/admin\/user\/lists.html","sort":99,"disable":0,"create_time":1602570372,"update_time":1608262169,"del":0,"partner_id":0,"sub":[]},{"id":35,"type":1,"system":0,"pid":33,"name":"\u4f1a\u5458\u7b49\u7ea7","icon":"","uri":"\/admin\/user_level\/lists.html","sort":97,"disable":0,"create_time":1602570437,"update_time":1608262182,"del":0,"partner_id":0,"sub":[]},{"id":139,"type":1,"system":0,"pid":33,"name":"\u8f6c\u8d26\u8bb0\u5f55","icon":"","uri":"\/admin\/user\/transferrecord.html","sort":50,"disable":0,"create_time":1618631242,"update_time":null,"del":0,"partner_id":0,"sub":[]}]},{"id":85,"type":1,"system":0,"pid":0,"name":"\u56e2\u961f","icon":"layui-icon-template-1","uri":"","sort":91,"disable":0,"create_time":1605949476,"update_time":1641462338,"del":0,"partner_id":0,"sub":[{"id":86,"type":1,"system":0,"pid":85,"name":"\u56e2\u961f\u5217\u8868","icon":"","uri":"\/admin\/distribution_member\/index.html","sort":50,"disable":0,"create_time":1605949513,"update_time":1641462357,"del":0,"partner_id":0,"sub":[]}]},{"id":65,"type":1,"system":0,"pid":0,"name":"\u5185\u5bb9","icon":"layui-icon-read","uri":"","sort":89,"disable":0,"create_time":1605172316,"update_time":1608101965,"del":0,"partner_id":0,"sub":[{"id":66,"type":1,"system":0,"pid":65,"name":"\u5e7f\u544a","icon":"","uri":"","sort":50,"disable":0,"create_time":1605172328,"update_time":1605522463,"del":0,"partner_id":0,"sub":[{"id":68,"type":1,"system":0,"pid":66,"name":"\u5e7f\u544a\u4f4d","icon":"","uri":"\/admin\/ad_position\/lists.html","sort":50,"disable":0,"create_time":1605172428,"update_time":1612425380,"del":0,"partner_id":0,"sub":[]},{"id":67,"type":1,"system":0,"pid":66,"name":"\u5e7f\u544a\u7ba1\u7406","icon":"","uri":"\/admin\/ad\/lists.html","sort":50,"disable":0,"create_time":1605172346,"update_time":1605172376,"del":0,"partner_id":0,"sub":[]}]},{"id":69,"type":1,"system":0,"pid":65,"name":"\u5e2e\u52a9","icon":"","uri":"","sort":50,"disable":0,"create_time":1605177392,"update_time":1605522474,"del":0,"partner_id":0,"sub":[{"id":70,"type":1,"system":0,"pid":69,"name":"\u5e2e\u52a9\u7ba1\u7406","icon":"","uri":"\/admin\/help\/lists.html","sort":50,"disable":0,"create_time":1605177427,"update_time":null,"del":0,"partner_id":0,"sub":[]},{"id":71,"type":1,"system":0,"pid":69,"name":"\u5e2e\u52a9\u5206\u7c7b","icon":"","uri":"\/admin\/help_category\/lists.html","sort":50,"disable":0,"create_time":1605177450,"update_time":null,"del":0,"partner_id":0,"sub":[]}]},{"id":73,"type":1,"system":0,"pid":65,"name":"\u6587\u7ae0","icon":"","uri":"","sort":50,"disable":0,"create_time":1605250150,"update_time":1605522487,"del":0,"partner_id":0,"sub":[{"id":75,"type":1,"system":0,"pid":73,"name":"\u6587\u7ae0\u5206\u7c7b","icon":"","uri":"\/admin\/article_category\/lists.html","sort":50,"disable":0,"create_time":1605250217,"update_time":null,"del":0,"partner_id":0,"sub":[]},{"id":74,"type":1,"system":0,"pid":73,"name":"\u6587\u7ae0\u7ba1\u7406","icon":"","uri":"\/admin\/article\/lists.html","sort":50,"disable":0,"create_time":1605250172,"update_time":null,"del":0,"partner_id":0,"sub":[]}]}]},{"id":49,"type":1,"system":0,"pid":0,"name":"\u5fae\u4fe1","icon":"layui-icon-login-wechat","uri":"","sort":85,"disable":0,"create_time":1603417725,"update_time":1608101989,"del":0,"partner_id":0,"sub":[{"id":50,"type":1,"system":0,"pid":49,"name":"\u5fae\u4fe1\u516c\u4f17\u53f7","icon":"","uri":"","sort":99,"disable":0,"create_time":1603417748,"update_time":1608193993,"del":0,"partner_id":0,"sub":[{"id":51,"type":1,"system":0,"pid":50,"name":"\u516c\u4f17\u53f7\u8bbe\u7f6e","icon":"","uri":"\/admin\/oa\/setoa.html","sort":99,"disable":0,"create_time":1603417764,"update_time":1608193146,"del":0,"partner_id":0,"sub":[]},{"id":52,"type":1,"system":0,"pid":50,"name":"\u83dc\u5355\u7ba1\u7406","icon":"","uri":"\/admin\/oa\/oamenu.html","sort":97,"disable":0,"create_time":1603417789,"update_time":1608193168,"del":0,"partner_id":0,"sub":[]},{"id":116,"type":1,"system":0,"pid":50,"name":"\u56de\u590d\u7ba1\u7406","icon":"","uri":"\/admin\/wechat_reply\/lists.html","sort":95,"disable":0,"create_time":1607139107,"update_time":1608193178,"del":0,"partner_id":0,"sub":[]}]},{"id":53,"type":1,"system":0,"pid":49,"name":"\u5fae\u4fe1\u5c0f\u7a0b\u5e8f","icon":"","uri":"","sort":97,"disable":0,"create_time":1603417800,"update_time":1608194002,"del":0,"partner_id":0,"sub":[{"id":54,"type":1,"system":0,"pid":53,"name":"\u5c0f\u7a0b\u5e8f\u8bbe\u7f6e","icon":"","uri":"\/admin\/mnp\/setmnp.html","sort":99,"disable":0,"create_time":1603417818,"update_time":1608193191,"del":0,"partner_id":0,"sub":[]}]},{"id":120,"type":1,"system":0,"pid":49,"name":" \u5f00\u653e\u5e73\u53f0","icon":"","uri":"","sort":50,"disable":0,"create_time":1608200356,"update_time":1612425336,"del":0,"partner_id":0,"sub":[{"id":121,"type":1,"system":0,"pid":120,"name":"\u5f00\u653e\u5e73\u53f0","icon":"","uri":"\/admin\/op\/config.html","sort":50,"disable":0,"create_time":1608200416,"update_time":1612425325,"del":0,"partner_id":0,"sub":[]}]}]},{"id":81,"type":1,"system":0,"pid":0,"name":"\u8d22\u52a1","icon":"layui-icon-rmb","uri":"","sort":83,"disable":0,"create_time":1605664275,"update_time":1608102003,"del":0,"partner_id":0,"sub":[{"id":122,"type":1,"system":0,"pid":81,"name":"\u8d22\u52a1\u6982\u51b5","icon":"","uri":"\/admin\/finance\/lists.html","sort":99,"disable":0,"create_time":1608363142,"update_time":1608455635,"del":0,"partner_id":0,"sub":[]},{"id":84,"type":1,"system":0,"pid":81,"name":"\u8d44\u91d1\u8bb0\u5f55","icon":"","uri":"\/admin\/account_log\/capitallist.html","sort":50,"disable":0,"create_time":1605693585,"update_time":1605865218,"del":0,"partner_id":0,"sub":[]},{"id":91,"type":1,"system":0,"pid":81,"name":"\u7528\u6237\u63d0\u73b0","icon":"","uri":"\/admin\/withdraw\/lists.html","sort":50,"disable":0,"create_time":1606448795,"update_time":1641462389,"del":0,"partner_id":0,"sub":[]}]},{"id":102,"type":1,"system":0,"pid":0,"name":"\u6570\u636e","icon":"layui-icon-website","uri":"","sort":81,"disable":0,"create_time":1606449677,"update_time":1608102018,"del":0,"partner_id":0,"sub":[{"id":103,"type":1,"system":0,"pid":102,"name":"\u4f1a\u5458","icon":"","uri":"\/admin\/statistics\/member.html","sort":100,"disable":0,"create_time":1606449697,"update_time":1608719516,"del":0,"partner_id":0,"sub":[]},{"id":104,"type":1,"system":0,"pid":102,"name":"\u5546\u54c1","icon":"","uri":"\/admin\/statistics\/goods.html","sort":90,"disable":0,"create_time":1606449713,"update_time":1608719471,"del":0,"partner_id":0,"sub":[]},{"id":105,"type":1,"system":0,"pid":102,"name":"\u4ea4\u6613","icon":"","uri":"\/admin\/statistics\/deal.html","sort":80,"disable":0,"create_time":1606449733,"update_time":1608719534,"del":0,"partner_id":0,"sub":[]},{"id":106,"type":1,"system":0,"pid":102,"name":"\u8bbf\u95ee","icon":"","uri":"\/admin\/statistics\/visit.html","sort":70,"disable":0,"create_time":1606449750,"update_time":1610340707,"del":0,"partner_id":0,"sub":[]}]},{"id":18,"type":1,"system":0,"pid":0,"name":"\u8bbe\u7f6e","icon":"layui-icon-set","uri":"","sort":79,"disable":0,"create_time":1597633295,"update_time":1608102027,"del":0,"partner_id":0,"sub":[{"id":17,"type":1,"system":0,"pid":18,"name":"\u57fa\u7840\u8bbe\u7f6e","icon":"","uri":"","sort":99,"disable":0,"create_time":1597633276,"update_time":1608102098,"del":0,"partner_id":0,"sub":[{"id":21,"type":1,"system":0,"pid":17,"name":"\u7f51\u7ad9\u8bbe\u7f6e","icon":"","uri":"\/admin\/basic\/website.html","sort":99,"disable":0,"create_time":1597658026,"update_time":1608467331,"del":0,"partner_id":0,"sub":[]},{"id":22,"type":1,"system":0,"pid":17,"name":"\u7248\u6743\u5907\u6848","icon":"","uri":"\/admin\/basic\/copyright.html","sort":97,"disable":0,"create_time":1597658101,"update_time":1608467338,"del":0,"partner_id":0,"sub":[]},{"id":59,"type":1,"system":0,"pid":17,"name":"\u652f\u4ed8\u8bbe\u7f6e","icon":"","uri":"\/admin\/pay_config\/lists.html","sort":95,"disable":0,"create_time":1603779401,"update_time":1608467354,"del":0,"partner_id":0,"sub":[]},{"id":109,"type":1,"system":0,"pid":17,"name":"APP\u8bbe\u7f6e","icon":"","uri":"\/admin\/basic\/app.html","sort":50,"disable":0,"create_time":1606819436,"update_time":null,"del":0,"partner_id":0,"sub":[]}]},{"id":56,"type":1,"system":0,"pid":18,"name":"\u5546\u57ce\u8bbe\u7f6e","icon":"","uri":"","sort":97,"disable":0,"create_time":1603524640,"update_time":1608102112,"del":0,"partner_id":0,"sub":[{"id":90,"type":1,"system":0,"pid":56,"name":"\u63d0\u73b0\u8f6c\u8d26\u914d\u7f6e","icon":"","uri":"\/admin\/shop_setting\/withdraw.html","sort":100,"disable":0,"create_time":1606357500,"update_time":1641888461,"del":0,"partner_id":0,"sub":[]},{"id":144,"type":1,"system":0,"pid":56,"name":"\u8fd4\u4f63\u914d\u7f6e","icon":"","uri":"\/admin\/shop_setting\/yongjin.html","sort":100,"disable":0,"create_time":1641888283,"update_time":1641888418,"del":0,"partner_id":0,"sub":[]},{"id":57,"type":1,"system":0,"pid":56,"name":"\u4ea4\u6613\u8bbe\u7f6e","icon":"","uri":"\/admin\/shop_setting\/trading.html","sort":99,"disable":0,"create_time":1603524686,"update_time":1608467395,"del":0,"partner_id":0,"sub":[]},{"id":138,"type":1,"system":0,"pid":56,"name":"\u6ce8\u518c\u8bbe\u7f6e","icon":"","uri":"\/admin\/shop_setting\/setregister.html","sort":50,"disable":0,"create_time":1614247116,"update_time":null,"del":0,"partner_id":0,"sub":[]},{"id":124,"type":1,"system":0,"pid":56,"name":"\u5ba2\u670d\u8bbe\u7f6e","icon":"","uri":"\/admin\/service_config\/config.html","sort":50,"disable":0,"create_time":1608972991,"update_time":null,"del":0,"partner_id":0,"sub":[]},{"id":132,"type":1,"system":0,"pid":56,"name":"\u5c0f\u7968\u6253\u5370","icon":"layui-icon-carousel","uri":"\/admin\/printer\/lists.html","sort":50,"disable":0,"create_time":1612523268,"update_time":null,"del":0,"partner_id":0,"sub":[]},{"id":123,"type":1,"system":0,"pid":56,"name":"\u70ed\u95e8\u641c\u7d22","icon":"","uri":"\/admin\/hot_search\/index.html","sort":50,"disable":0,"create_time":1608607023,"update_time":null,"del":0,"partner_id":0,"sub":[]},{"id":58,"type":1,"system":0,"pid":56,"name":"\u653f\u7b56\u534f\u8bae","icon":"","uri":"\/admin\/shop_setting\/policy.html","sort":50,"disable":0,"create_time":1603524707,"update_time":null,"del":0,"partner_id":0,"sub":[]},{"id":43,"type":1,"system":0,"pid":56,"name":"\u914d\u9001\u7ba1\u7406","icon":"","uri":"\/admin\/freight\/lists.html","sort":50,"disable":0,"create_time":1602666008,"update_time":1603525668,"del":0,"partner_id":0,"sub":[]}]},{"id":1,"type":1,"system":1,"pid":18,"name":"\u6743\u9650\u7ba1\u7406","icon":"","uri":"","sort":95,"disable":0,"create_time":1597593692,"update_time":1608102122,"del":0,"partner_id":0,"sub":[{"id":6,"type":1,"system":0,"pid":1,"name":"\u7ba1\u7406\u5458","icon":"","uri":"\/admin\/admin\/lists.html","sort":51,"disable":0,"create_time":1597594526,"update_time":1597636523,"del":0,"partner_id":0,"sub":[]},{"id":2,"type":1,"system":0,"pid":1,"name":"\u83dc\u5355\u6743\u9650","icon":"","uri":"\/admin\/auth\/lists.html","sort":50,"disable":0,"create_time":1597593762,"update_time":1612594453,"del":0,"partner_id":0,"sub":[]},{"id":10,"type":1,"system":0,"pid":1,"name":"\u89d2\u8272","icon":"","uri":"\/admin\/role\/lists.html","sort":50,"disable":0,"create_time":1597596178,"update_time":1597635420,"del":0,"partner_id":0,"sub":[]}]}]},{"id":19,"type":1,"system":0,"pid":0,"name":"\u4e2a\u4eba","icon":"layui-icon-friends","uri":"\/admin\/my\/password.html","sort":50,"disable":0,"create_time":1597633558,"update_time":1608102250,"del":0,"partner_id":0,"sub":[{"id":20,"type":1,"system":0,"pid":19,"name":"\u4fee\u6539\u5bc6\u7801","icon":"","uri":"\/admin\/my\/password.html","sort":100,"disable":0,"create_time":1597633582,"update_time":1606442853,"del":0,"partner_id":0,"sub":[]}]}]');
+                var data = [];
+                menus.forEach(function (item) {
+                    if (id === item['id']) {
+                        data = item;
+                    }
+                });
+                // 是否存在二级菜单,不存在则隐藏
+                if (data) {
+                    $("#LAY_app_body").removeClass('hide-second-nav');
+                } else {
+                    $("#LAY_app_body").addClass('hide-second-nav');
+                }
+                // 使用模板引擎, 渲染二三级菜单
+                var getTpl =  document.getElementById('subMenu').innerHTML;
+                var view = document.getElementById('view');
+                laytpl(getTpl).render(data, function(html){
+                    view.innerHTML = html;
+                });
+
+                // 触发点击事件
+                $('.second-nav .layui-this a').trigger("click");
+
+                // 二级菜单切换
+                $(".second-nav .layui-nav-tree .layui-nav-item").click(function () {
+                    if (!$(this).hasClass("layui-nav-itemed")) {
+                        $(".second-nav .layui-nav .layui-nav-itemed dl dd").removeClass('layui-this');
+                        $(this).siblings().removeClass('layui-this');
+                        $(this).addClass('layui-this');
+                    }
+                });
+
+                // 三级菜单样式切换
+                $(".second-nav .layui-nav-tree .layui-nav-itemed dd").click(function () {
+                    $(".second-nav .layui-nav .layui-nav-item").removeClass('layui-this');
+                    $(".second-nav .layui-nav .layui-nav-item dl dd").removeClass('layui-this');
+                    $(this).siblings().removeClass('layui-this');
+                    $(this).addClass('layui-this');
+                });
+
+            });
+
+        });
+    </script>
+</body>
+
+</html>
